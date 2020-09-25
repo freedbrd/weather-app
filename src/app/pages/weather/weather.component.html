@@ -1,3 +1,37 @@
 <app-city-search></app-city-search>
-{{currWeather?.name}} <br>
-{{currWeather?.main?.temp}}
+<div class="weather-wrapper">
+  <nz-row *ngIf="currWeather"
+          [nzGutter]="16">
+    <nz-col [nzSpan]="7">
+      <nz-statistic [nzValue]="currWeather?.name"
+                    nzTitle="City"></nz-statistic>
+    </nz-col>
+    <nz-col [nzSpan]="4">
+      <nz-statistic [nzValue]="currWeather?.main?.temp"
+                    nzTitle="Temp"
+                    nzSuffix="℃"></nz-statistic>
+    </nz-col>
+    <nz-col [nzSpan]="4">
+      <nz-statistic [nzValue]="currWeather?.main?.feels_like"
+                    nzTitle="Feels like"
+                    nzSuffix="℃"></nz-statistic>
+    </nz-col>
+    <nz-col [nzSpan]="4">
+      <nz-statistic [nzValue]="currWeather?.main?.humidity"
+                    nzTitle="Humidity"
+                    nzSuffix="%"></nz-statistic>
+    </nz-col>
+    <nz-col [nzSpan]="4">
+      <nz-statistic [nzValue]="currWeather?.wind?.speed"
+                    nzTitle="Wind speed"
+                    nzSuffix="meter/sec"></nz-statistic>
+    </nz-col>
+  </nz-row>
+</div>
+
+<div class="map-wrp">
+  <agm-map *ngIf="currWeather" [latitude]="currWeather.coord.lat" [longitude]="currWeather.coord.lon">
+    <agm-marker [latitude]="currWeather.coord.lat" [longitude]="currWeather.coord.lon"></agm-marker>
+  </agm-map>
+</div>
+

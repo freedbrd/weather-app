@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -11,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDHuQrFXZNo30ewLnKAfMp-_zbVm1rvL_8'
+    })
   ],
   exports: [
     FormsModule,
@@ -18,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
+    AgmCoreModule
   ]
 })
 export class SharedModule { }

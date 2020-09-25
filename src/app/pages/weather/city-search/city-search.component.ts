@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { City } from '../model/city.interface';
 import { Observable } from 'rxjs';
 import { WeatherService } from '../weather.service';
+import { Location } from '../model/location.interface';
 
 @Component({
   selector: 'app-city-search',
@@ -16,12 +17,15 @@ export class CitySearchComponent implements OnInit {
   cityList: City[];
   selectedCity: City;
 
+  private currentLocation: Location;
+
   constructor(
     private locationService: LocationService,
     private weatherService: WeatherService,
   ) {}
 
   ngOnInit(): void {
+    this.getCurrentLocation();
     this.onLocationChange();
   }
 
@@ -36,6 +40,14 @@ export class CitySearchComponent implements OnInit {
       });
   }
 
+  private getCurrentLocation(): void {
+    this.locationService.getCurrentLocation()
+      .subscribe((res: Location) => {
+        this.currentLocation = res;
+        this.selectCity({name: res.city} as City);
+      });
+  }
+
   private onLocationChange(): void {
     this.locationControl.valueChanges
       .pipe(
@@ -47,7 +59,7 @@ export class CitySearchComponent implements OnInit {
   }
 
   private getCityByName = (city: string): Observable<City[]> => {
-    return this.locationService.getCitiesByName(city)
+    return this.locationService.getCitiesByName(city, this.currentLocation.country_code)
       .pipe(
         map((cityList: City[]) => this.filterCityList(cityList, city)),
       );

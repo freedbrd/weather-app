@@ -19,8 +19,7 @@ export class LocationService {
     return this.http.get<Location>(this.apiUrl);
   }
 
-  getCitiesByName(city: string): Observable<City[]> {
-    // return this.http.get(`${this.apiCityUrl}?q=${city}&country=UA&_start=0&_end=10`);
-    return this.http.get<City[]>(`${this.apiCityUrl}?name_like=${city}&country=UA&_sort=name`);
+  getCitiesByName(city: string, country: string): Observable<City[]> {
+    return this.http.get<City[]>(`${this.apiCityUrl}?name_like=${city}&country=${country}&_sort=name`);
   }
 }
