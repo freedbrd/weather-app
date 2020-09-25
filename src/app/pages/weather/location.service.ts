@@ -21,6 +21,6 @@ export class LocationService {
 
   getCitiesByName(city: string): Observable<City[]> {
     // return this.http.get(`${this.apiCityUrl}?q=${city}&country=UA&_start=0&_end=10`);
-    return this.http.get<City[]>(`${this.apiCityUrl}?_search?name=${city}&country=UA&_sort=name`);
+    return this.http.get<City[]>(`${this.apiCityUrl}?name_like=${city}&country=UA&_sort=name`);
   }
 }

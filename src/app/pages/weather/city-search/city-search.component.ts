@@ -32,7 +32,7 @@ export class CitySearchComponent implements OnInit {
     this.weatherService.getWeatherByName(this.selectedCity.name)
       .subscribe(res => {
         this.cityList = null;
-        console.log(res);
+        this.weatherService.weather$.next(res);
       });
   }
 
@@ -43,9 +43,7 @@ export class CitySearchComponent implements OnInit {
         distinctUntilChanged(),
         mergeMap(this.getCityByName),
       )
-      .subscribe(res => {
-        this.cityList = res;
-      });
+      .subscribe(res => this.cityList = res);
   }
 
   private getCityByName = (city: string): Observable<City[]> => {
@@ -55,8 +53,8 @@ export class CitySearchComponent implements OnInit {
       );
   };
 
-  private filterCityList = (cityList: City[], city) => {
-    return cityList.filter((item: City) => item.name.startsWith(city))
+  private filterCityList = (cityList: City[], city: string) => {
+    return cityList.filter((item: City) => item.name.toLowerCase().startsWith(city.toLowerCase()))
       .slice(0, 10);
   };
 }
