@@ -1,0 +1,11 @@
+<nz-input-group nzSize="large">
+  <input type="text"
+         nz-input
+         [formControl]="locationControl"
+         placeholder="Enter the city"/>
+</nz-input-group>
+<nz-list *ngIf="cityList" nzBordered>
+  <nz-list-item (click)="selectCity(item)" *ngFor="let item of cityList">
+    {{ item?.name }}
+  </nz-list-item>
+</nz-list>
