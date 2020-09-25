@@ -5,7 +5,7 @@ export interface Weather {
   clouds: {
     all: number
   };
-  coord: { lon: number, lat: number };
+  coord: Coord;
 }
 
 export interface WeatherInfo {
@@ -18,4 +18,9 @@ export interface WeatherInfo {
 export interface Wind {
   deg: number;
   speed: number;
+}
+
+export interface Coord {
+  on: number;
+  lat: number;
 }
