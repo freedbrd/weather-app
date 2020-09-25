@@ -21,6 +21,6 @@ export interface Wind {
 }
 
 export interface Coord {
-  on: number;
+  lon: number;
   lat: number;
 }
